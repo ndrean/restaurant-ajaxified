@@ -1,0 +1,16 @@
+<h1><%= @restaurant.name %></h1>
+
+<p><%= @restaurant.address %></p>
+
+<%= render 'reviews/form', restaurant: @restaurant, review: @review %>
+
+<h2>Reviews</h2>
+<div id="reviews">
+  <% if @restaurant.reviews.any? %>
+      <% @restaurant.reviews.each do |restaurant_review| %>
+        <%= render 'reviews/show', review: restaurant_review %>
+      <% end %>
+  <% else %>
+    <p>No review yet for this restaurant!</p>
+  <% end %>
+</div>

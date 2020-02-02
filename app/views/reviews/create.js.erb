@@ -1,0 +1,21 @@
+function addReview(innerHTML) {
+  const reviewsContainer = document.getElementById('reviews')
+  reviewsContainer.insertAdjacentHTML('beforeend', innerHTML)
+}
+
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_review')
+  newReviewForm.innerHTML = innerHTML
+}
+
+// console.log('<%= @review.content %>')
+<% if @review.errors.any? %>
+  // if review didn't pass validations, you need to re-render the form with
+  // the "failed" review
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>')
+<% else %>
+  // if review has been saved correctly, add the show partial at the end of the list
+  // and refresh the form with a brand new Review object
+  addReview('<%= j render "reviews/show", review: @review %>')
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>')
+<% end %>
